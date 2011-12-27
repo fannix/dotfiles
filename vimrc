@@ -225,3 +225,8 @@ set ai "Auto indent
 set si "Smart indet
 set wrap "Wrap lines
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Personalization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme solarized
+
