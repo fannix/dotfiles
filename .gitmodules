@@ -19,3 +19,6 @@
 [submodule "bundle/fuzzyfinder"]
 	path = bundle/fuzzyfinder
 	url = git://github.com/vim-scripts/FuzzyFinder.git
+[submodule "bundle/vim-ipython"]
+	path = bundle/vim-ipython
+	url = git://github.com/ivanov/vim-ipython.git
