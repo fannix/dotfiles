@@ -77,7 +77,7 @@ set noswapfile
 set laststatus=2
 
 " Format the statusline
-set statusline=\ %F%m%r%h\ %w\ \ %Y\ \ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c\ %p%%
+set statusline=\ %F%m%r%h\ %w\ \ %Y\ \ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c\ %p%%\ %{fugitive#statusline()}
 
 function! CurDir()
     let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
@@ -165,7 +165,12 @@ map <leader>wo <C-W>o
 " => python
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pydiction_location = '~/.vim/ftplugin/pydiction-1.2/complete-dict'
+let g:pyflakes_use_quickfix = 0
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
 highlight SpellBad ctermbg=3
+nmap <leader>a <ESC>:Ack!
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -230,3 +235,14 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
 
+let g:tagbar_type_tex = {
+            \ 'ctagstype' : 'latex',
+            \ 'kinds'     : [
+            \ 's:sections',
+            \ 'g:graphics',
+            \ 'l:labels',
+            \ 'r:refs:1',
+            \ 'p:pagerefs:1'
+            \ ],
+            \ 'sort'    : 0,
+            \ }
