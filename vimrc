@@ -166,6 +166,8 @@ map <leader>wo <C-W>o
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pydiction_location = '~/.vim/ftplugin/pydiction-1.2/complete-dict'
 let g:pyflakes_use_quickfix = 0
+let g:pymode_lint_message = 0
+let g:pymode_rope = 0
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
@@ -196,6 +198,7 @@ au FileType tex :setlocal spell spelllang=en_us
 imap <C-b> <Plug>Tex_MathBF
 imap <C-h> <Plug>Tex_MathCal
 imap <C-t> <Plug>Tex_InsertItemOnThisLine
+:set tw=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => other
