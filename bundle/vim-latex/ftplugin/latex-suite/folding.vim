@@ -2,7 +2,6 @@
 " 	     File: folding.vim
 "      Author: Srinath Avadhanula
 "      		   modifications/additions by Zhang Linbo
-" 	      CVS: $Id$
 "     Created: Tue Apr 23 05:00 PM 2002 PST
 " 
 "  Description: functions to interact with Syntaxfolds.vim
@@ -54,7 +53,13 @@ function! Tex_FoldSections(lst, endpat)
 	if s =~ '%%fakesection'
 		let s = '^\s*' . s
 	else
-		let s = '^\s*\\' . s . '\W\|^\s*%%fake' . s
+		let pattern = ''
+		let prefix = ''
+		for label in split(s, "|")
+			let pattern .= prefix . '^\s*\\' . label . '\W\|^\s*%%fake' . label
+			let prefix = '\W\|'
+		endfor
+		let s = pattern
 	endif
 	let endpat = s . '\|' . a:endpat
 	if i > 0

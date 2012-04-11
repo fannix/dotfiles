@@ -8,19 +8,20 @@ This plugin allow you create python code in vim very easily.
 There is no need to install the pylint_, rope_ or any used python library on your system.
 
 - Python objects and motion (]], 3[[, ]]M, vaC, viM, daC, ciM, ...)
+- Folding of python code
+- Virtualenv support
 - Highlight syntax errors
 - Highlight and auto fix unused imports
+- Many linters (pylint_, pyflakes_, ...) that can be run simultaneously
 - Strong code completion
 - Code refactoring
 - Python documentation
 - Run python code
 - Go to definition
 - Powerful customization
-- Virtualenv support
-- Many linters (pylint_, pyflakes_, ...) that can be run simultaneously
-- And more...
+- And more, more ...
 
-See (old) screencast here: http://t.co/3b0bzeXA (sorry for quality, this is my first screencast)
+See (very old) screencast here: http://t.co/3b0bzeXA (sorry for quality, this is my first screencast)
 
 
 .. contents::
@@ -29,11 +30,15 @@ See (old) screencast here: http://t.co/3b0bzeXA (sorry for quality, this is my f
 Changelog
 =========
 
-## 2012-02-12 0.5.8
+## 2012-04-10 0.6.2
 -------------------
-* Fix pylint for Windows users
-* Python documentation search running from Vim (delete g:pydoc option)
-* Python code execution running from Vim (delete g:python option)
+* Fix pymode_run for "unnamed" clipboard
+* Add 'pymode_lint_mccabe_complexity' option
+* Update Pep8 to version 1.0.1
+* Warning! Change 'pymode_rope_goto_def_newwin' option
+  for open "goto definition" in new window, set it to 'new' or 'vnew'
+  for horizontally or vertically split
+  If you use default behaviour (in the same buffer), not changes needed.
 
 
 Requirements
@@ -133,7 +138,7 @@ Default values: ::
 
     " Switch pylint, pyflakes, pep8, mccabe code-checkers
     " Can have multiply values "pep8,pyflakes,mcccabe"
-    let g:pymode_lint_checker = "pylint"
+    let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
 
     " Skip errors and warnings
     " E.g. "E501,W002", "E2,W" (Skip all Warnings and Errors startswith E2) and etc
@@ -168,6 +173,9 @@ Default values: ::
 
     " Place error signs
     let g:pymode_lint_signs = 1
+
+    " Maximum allowed mccabe complexity
+    let g:pymode_lint_mccabe_complexity = 8
 
     " Minimal height of pylint error window
     let g:pymode_lint_minheight = 3
@@ -218,18 +226,42 @@ Default values: ::
 
     let g:pymode_rope_guess_project = 1
 
-    let g:pymode_rope_goto_def_newwin = 0
+    let g:pymode_rope_goto_def_newwin = ""
 
     let g:pymode_rope_always_show_complete_menu = 0
+
+
+Automatically folding of python code
+--------------------------------------
+
+Default values: ::
+
+    " Enable python folding
+    let g:pymode_folding = 1
+
+
+Vim python motions and operators
+--------------------------------
+
+Default values: ::
+
+    " Enable python objects and motion
+    let g:pymode_motion = 1
+
+
+Virtualenv support
+------------------
+
+Default values: ::
+
+    " Auto fix vim python paths if virtualenv enabled
+    let g:pymode_virtualenv = 1
 
 
 Other stuff
 -----------
 
 Default values: ::
-
-    " Load python objects and motion
-    let g:pymode_motion = 1
 
     " Load breakpoints plugin
     let g:pymode_breakpoint = 1
@@ -240,14 +272,8 @@ Default values: ::
     " Autoremove unused whitespaces
     let g:pymode_utils_whitespaces = 1
 
-    " Auto fix vim python paths if virtualenv enabled
-    let g:pymode_virtualenv = 1
-
     " Set default pymode python indent options
     let g:pymode_options_indent = 1
-
-    " Set default pymode python fold options
-    let g:pymode_options_fold = 1
 
     " Set default pymode python other options
     let g:pymode_options_other = 1
@@ -309,6 +335,12 @@ Keys           Command
 **K**          Show python docs (g:pymode_doc enabled)
 -------------- -------------
 **<C-Space>**  Rope autocomplete (g:pymode_rope enabled)
+-------------- -------------
+**<C-c>g**     Rope goto definition  (g:pymode_rope enabled)
+-------------- -------------
+**<C-c>d**     Rope show documentation  (g:pymode_rope enabled)
+-------------- -------------
+**<C-c>f**     Rope find occurrences  (g:pymode_rope enabled)
 -------------- -------------
 **<Leader>r**  Run python  (g:pymode_run enabled)
 -------------- -------------
@@ -402,7 +434,7 @@ Development of pylint-mode happens at github: https://github.com/klen/python-mod
 Copyright
 =========
 
-Copyright (C) 2011 Kirill Klenov (klen_)
+Copyright (C) 2012 Kirill Klenov (klen_)
 
     **Rope**
         Copyright (C) 2006-2010 Ali Gholami Rudi
@@ -416,6 +448,10 @@ Copyright (C) 2011 Kirill Klenov (klen_)
     **Pyflakes**:
         Copyright (c) 2005 Divmod, Inc.
         http://www.divmod.com/
+
+    **PEP8**
+        Copyright (C) 2006 Johann C. Rocholl <johann@rocholl.net>
+        http://github.com/jcrocholl/pep8
 
     **Python syntax for vim**
         Copyright (c) 2010 Dmitry Vasiliev

@@ -3,7 +3,6 @@
 "          Srinath Avadhanula incorporated it into latex-suite with
 "          significant modifications.
 "          Parts of this file may be copyrighted by others as noted.
-" CVS: $Id$
 " Description:
 " 	This ftplugin provides the following maps:
 " . <M-b> encloses the previous character in \mathbf{}
@@ -88,7 +87,7 @@ function! Tex_LeftRight()
 		let rhs = matchstr(matchedbrackets, char.'\zs.\ze')
 		return "\<BS>".IMAP_PutTextWithMovement('\left'.add.char.'<++>\right'.add.rhs.'<++>')
 	elseif char == '<'
-		return "\<BS>".IMAP_PutTextWithMovement('langle<++>\rangle<++>')
+		return "\<BS>".IMAP_PutTextWithMovement('\langle <++>\rangle<++>')
 	elseif char == 'q'
 		return "\<BS>".IMAP_PutTextWithMovement('\lefteqn{<++>}<++>')
 	else

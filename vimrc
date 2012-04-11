@@ -169,6 +169,7 @@ let g:pymode_lint_message = 0
 let g:pymode_rope = 0
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+let g:pymode_lint_ignore = "E111"
 set completeopt=menuone,longest,preview
 highlight SpellBad ctermbg=3
 nmap <leader>a <ESC>:Ack!

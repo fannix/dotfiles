@@ -24,20 +24,13 @@ if !pymode#Default('g:pymode_options_indent', 1) || g:pymode_options_indent
     setlocal autoindent
 endif
 
-" Python fold options
-if !pymode#Default('g:pymode_options_fold', 1) || g:pymode_options_fold
-    setlocal foldlevelstart=99
-    setlocal foldlevel=99
-    setlocal foldmethod=indent
-endif
-
 " Python other options
 if !pymode#Default('g:pymode_options_other', 1) || g:pymode_options_other
     setlocal complete+=t
     setlocal formatoptions-=t
     setlocal number
     setlocal nowrap
-    setlocal textwidth=80
+    setlocal textwidth=79
 endif
 
 " }}}
@@ -103,10 +96,10 @@ endif
 if g:pymode_rope
 
     " DESC: Set keys
-    noremap <silent> <buffer> <C-c>g :RopeGotoDefinition<CR>
-    noremap <silent> <buffer> <C-c>d :RopeShowDoc<CR>
-    noremap <silent> <buffer> <C-c>f :RopeFindOccurrences<CR>
-    noremap <silent> <buffer> <C-c>m :emenu Rope.<TAB>
+    exe "noremap <silent> <buffer> " . g:pymode_rope_short_prefix . "g :RopeGotoDefinition<CR>"
+    exe "noremap <silent> <buffer> " . g:pymode_rope_short_prefix . "d :RopeShowDoc<CR>"
+    exe "noremap <silent> <buffer> " . g:pymode_rope_short_prefix . "f :RopeFindOccurrences<CR>"
+    exe "noremap <silent> <buffer> " . g:pymode_rope_short_prefix . "m :emenu Rope . <TAB>"
     inoremap <silent> <buffer> <S-TAB> <C-R>=RopeLuckyAssistInsertMode()<CR>
 
     let s:prascm = g:pymode_rope_always_show_complete_menu ? "<C-P>" : ""
@@ -153,5 +146,19 @@ if g:pymode_utils_whitespaces
 endif
 
 " }}}
+
+
+" Folding {{{
+
+if g:pymode_folding
+
+    setlocal foldmethod=expr
+    setlocal foldexpr=pymode#folding#expr(v:lnum)
+    setlocal foldtext=pymode#folding#text()
+
+endif
+
+" }}}
+
 
 " vim: fdm=marker:fdl=0

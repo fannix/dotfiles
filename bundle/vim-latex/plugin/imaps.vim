@@ -7,7 +7,7 @@
 " Description: insert mode template expander with cursor placement
 "              while preserving filetype indentation.
 "
-"     $Id$
+"     $Id: imaps.vim 997 2006-03-20 09:45:45Z srinathava $
 "
 " Documentation: {{{
 "
@@ -515,7 +515,7 @@ function! VEnclose(vstart, vend, VStart, VEnd)
 	" 1. characterwise selection and valid values for vstart and vend.
 	" OR
 	" 2. linewise selection and invalid values for VStart and VEnd
-	if (visualmode() == 'v' && (a:vstart != '' || a:vend != '')) || (a:VStart == '' && a:VEnd == '')
+	if (visualmode() ==# 'v' && (a:vstart != '' || a:vend != '')) || (a:VStart == '' && a:VEnd == '')
 
 		let newline = ""
 		let _r = @r

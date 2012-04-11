@@ -210,7 +210,7 @@ class VimUtils(ropemode.environment.Environment):
     def find_file(self, filename, readonly=False, other=False, force=False):
         if filename != self.filename() or force:
             if other:
-                vim.command('new')
+                vim.command(other)
             filename = '\\ '.join(s.rstrip() for s in filename.split())
             vim.command('e %s' % filename)
             if readonly:
@@ -288,7 +288,7 @@ class VimUtils(ropemode.environment.Environment):
                     (_vim_name(name), _vim_name(name)))
         if key is not None:
             key = prekey + key.replace(' ', '')
-            vim.command('map %s :call %s()<cr>' % (key, _vim_name(name)))
+            vim.command('noremap %s :call %s()<cr>' % (key, _vim_name(name)))
 
     @staticmethod
     def _add_function(name, callback, prefix=False):

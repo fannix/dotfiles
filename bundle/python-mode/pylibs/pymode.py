@@ -1,4 +1,10 @@
+import StringIO
+import locale
+
 import vim
+
+
+locale.setlocale(locale.LC_CTYPE, "C")
 
 
 def check_file():
@@ -17,50 +23,46 @@ def check_file():
                 errors += checker(filename)
             except SyntaxError, e:
                 errors.append(dict(
-                    lnum = e.lineno,
-                    col = e.offset,
-                    text = e.args[0]
+                    lnum=e.lineno,
+                    col=e.offset,
+                    text=e.args[0]
                 ))
                 break
+            except Exception, e:
+                print e
 
     for e in errors:
         e.update(
-            filename = filename,
-            bufnr = vim.current.buffer.number,
+            col=e.get('col') or '',
+            text=e.get('text', '').replace("'", "\"").split('\n')[0],
+            filename=filename,
+            bufnr=vim.current.buffer.number,
         )
 
-    def ignore_error(e):
-        for s in select:
-            if e['text'].startswith(s):
-                return True
-        for i in ignore:
-            if e['text'].startswith(i):
-                return False
-        return True
-
-    errors = filter(ignore_error, errors)
+    errors = filter(lambda e: _ignore_error(e, select, ignore), errors)
     errors = sorted(errors, key=lambda x: x['lnum'])
 
-    vim.command('let b:qf_list = %s' % repr(errors))
+    vim.command(('let b:qf_list = %s' % repr(errors)).replace('\': u', '\': '))
 
 
 def mccabe(filename):
     import mccabe as mc
-    return mc.get_module_complexity(filename)
+
+    complexity = int(vim.eval("g:pymode_lint_mccabe_complexity"))
+    return mc.get_module_complexity(filename, min=complexity)
 
 
 def pep8(filename):
-    _ = PEP8 or _init_pep8()
+    PEP8 or _init_pep8()
     checker = PEP8['module'].Checker(filename)
     checker.check_all()
     return checker.errors
 
 
 def pylint(filename):
-
-    import StringIO
     from logilab.astng.builder import MANAGER
-    _ = PYLINT or _init_pylint()
+
+    PYLINT or _init_pylint()
     linter = PYLINT['lint']
 
     MANAGER.astng_cache.clear()
@@ -81,15 +83,17 @@ def pyflakes(filename):
     w.messages.sort(lambda a, b: cmp(a.lineno, b.lineno))
     for w in w.messages:
         errors.append(dict(
-            lnum = w.lineno,
-            col = w.col,
-            text = w.message % w.message_args,
-            type = 'E'
+            lnum=w.lineno,
+            col=w.col,
+            text=w.message % w.message_args,
+            type='E'
         ))
     return errors
 
 
 PYLINT = dict()
+
+
 def _init_pylint():
 
     from pylint import lint, checkers
@@ -102,12 +106,11 @@ def _init_pylint():
         def add_message(self, msg_id, location, msg):
             _, _, line, col = location[1:]
             self.errors.append(dict(
-                lnum = line,
-                col = col,
-                text = "%s %s" % (msg_id, msg),
-                type = msg_id[0]
+                lnum=line,
+                col=col,
+                text="%s %s" % (msg_id, msg),
+                type=msg_id[0]
             ))
-
 
     PYLINT['lint'] = lint.PyLinter()
     PYLINT['re'] = re.compile('^(?:.:)?[^:]+:(\d+): \[([EWRCI]+)[^\]]*\] (.*)$')
@@ -121,18 +124,18 @@ def _init_pylint():
 
 
 PEP8 = dict()
+
+
 def _init_pep8():
 
     import pep8 as p8
 
     class _PEP8Options(object):
         # Default options taken from pep8.process_options()
-        max_complexity = -1
         verbose = False
         quiet = False
-        no_repeat = False
+        repeat = True
         exclude = [exc.rstrip('/') for exc in p8.DEFAULT_EXCLUDE.split(',')]
-        filename = ['*.py']
         select = []
         ignore = p8.DEFAULT_IGNORE.split(',')  # or []?
         show_source = False
@@ -141,7 +144,10 @@ def _init_pep8():
         count = False
         benchmark = False
         testsuite = ''
+        max_line_length = p8.MAX_LINE_LENGTH
+        filename = ['*.py']
         doctest = False
+
         logical_checks = physical_checks = None
         messages = counters = None
 
@@ -155,3 +161,13 @@ def _init_pep8():
 
     PEP8['init'] = True
     PEP8['module'] = p8
+
+
+def _ignore_error(e, select, ignore):
+    for s in select:
+        if e['text'].startswith(s):
+            return True
+    for i in ignore:
+        if e['text'].startswith(i):
+            return False
+    return True

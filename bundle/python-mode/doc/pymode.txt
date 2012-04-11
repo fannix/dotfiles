@@ -6,7 +6,7 @@
    (__)   (__)  (__) (_) (_)(_____)(_)\_)   (_/\/\_)(_____)(____/(____)     ~
 
 
-                          Version: 0.5.5
+                          Version: 0.6.1
 
 ==============================================================================
 CONTENTS                                                  *Python-mode-contents*
@@ -77,9 +77,13 @@ PythonMode. These options should be set in your vimrc.
 
 |'pymode_lint_minheight'|           Minimal height of pylint error window
 
+|'pymode_lint_mccabe_complexity'|   Maximum allowed mccabe complexity
+
 |'pymode_lint_maxheight'|           Maximal height of pylint error window
 
 |'pymode_rope'|                     Turns off rope script
+
+|'pymode_folding'|                  Turns on/off python folding
 
 |'pymode_breakpoint'|               Turns off breakpoint script
 
@@ -95,9 +99,6 @@ PythonMode. These options should be set in your vimrc.
 
 |'pymode_options_indent'|           Set default pymode options for
                                   python indentation
-
-|'pymode_options_fold'|             Set default pymode options for
-                                  python folding
 
 |'pymode_options_other'|            Set default pymode options for
                                   python codding
@@ -153,7 +154,7 @@ If this option is set to 0 then pylint script is disabled.
 Values: "pylint", "pyflakes", "pep8", "mccabe"
         You can set many checkers. E.g. "pyflakes,pep8,mccabe" ~
 
-Default: "pylint".
+Default: "pyflakes,pep8,mccabe".
 
 This option set code checkers.
 
@@ -245,6 +246,13 @@ Default: 3.
 Set minimal height for pylint cwindow
 
 ------------------------------------------------------------------------------
+                                               *'pymode_lint_mccabe_complexity'*
+Values: int
+Default: 8.
+
+Set minimal complexity for mccabe linter.
+
+------------------------------------------------------------------------------
                                                        *'pymode_lint_maxheight'*
 Values: int
 Default: 6.
@@ -319,16 +327,12 @@ If this option is set to 1, pymode enable next options for python buffers: >
     setlocal autoindent
 <
 ------------------------------------------------------------------------------
-                                                         *'pymode_options_fold'*
+                                                              *'pymode_folding'*
 Values: 0 or 1.
 Default: 1.
 
-If this option is set to 1, pymode enable next options for python buffers: >
+If this option is set to 1, pymode enable python-folding.
 
-    setlocal foldlevelstart=99
-    setlocal foldlevel=99
-    setlocal foldmethod=indent
-<
 ------------------------------------------------------------------------------
                                                         *'pymode_options_other'*
 Values: 0 or 1.
@@ -461,6 +465,10 @@ You may set |exrc| and |secure| in your |vimrc| for auto set custom settings fro
     Pyflakes:
         Copyright (c) 2005 Divmod, Inc.
         http://www.divmod.com/
+
+    PEP8:
+        Copyright (C) 2006 Johann C. Rocholl <johann@rocholl.net>
+        http://github.com/jcrocholl/pep8
 
     Python syntax for vim:
         Copyright (c) 2010 Dmitry Vasiliev
