@@ -1,6 +1,169 @@
 Changelog
 =========
 
+## 2014-06-11 0.8.1
+-------------------
+    * Pylama updated to version 3.3.2
+    * Get fold's expression symbol from &fillchars;
+    * Fixed error when setting g:pymode_breakpoint_cmd (expobrain);
+    * Fixed code running;
+    * Ability to override rope project root and .ropeproject folder
+    * Added path argument to `PymodeRopeNewProject` which skips prompt
+    * Disable `pymode_rope_lookup_project` by default
+    * Options added:
+        'pymode_rope_project_root', 'pymode_rope_ropefolder'
+
+
+## 2013-12-04 0.7.8b
+--------------------
+    * Update indentation support;
+    * Python3 support;
+    * Removed pymode modeline support;
+    * Disabled async code checking support;
+    * Options changes:
+        'pymode_doc_key' -> 'pymode_doc_bind'
+        'pymode_run_key' -> 'pymode_run_bind'
+        'pymode_breakpoint_key' -> 'pymode_breakpoint_bind'
+        'pymode_breakpoint_template' -> 'pymode_breakpoint_cmd'
+        'pymode_lint_write' -> 'pymode_lint_on_write'
+        'pymode_lint_onfly' -> 'pymode_lint_on_fly'
+        'pymode_lint_checker' -> 'pymode_lint_checkers'
+        'pymode_lint_minheight' -> 'pymode_quickfix_minheight'
+        'pymode_lint_maxheight' -> 'pymode_quickfix_maxheight'
+        'pymode_rope_autocomplete_map' -> 'pymode_rope_completion_bind'
+        'pymode_rope_enable_autoimport' -> 'pymode_rope_autoimport'
+
+    * Options removed:
+
+        'pymode_lint_hold', 'pymode_lint_config', 'pymode_lint_jump',
+        'pymode_lint_signs_always_visible', 'pymode_rope_extended_complete',
+        'pymode_rope_auto_project', 'pymode_rope_autoimport_generate',
+        'pymode_rope_autoimport_underlines', 'pymode_rope_codeassist_maxfixes',
+        'pymode_rope_sorted_completions', 'pymode_rope_extended_complete',
+        'pymode_rope_confirm_saving', 'pymode_rope_global_prefix',
+        'pymode_rope_local_prefix', 'pymode_rope_vim_completion',
+        'pymode_rope_guess_project', 'pymode_rope_goto_def_newwin',
+        'pymode_rope_always_show_complete_menu'
+
+    * Options added:
+        'pymode_rope_regenerate_on_write', 'pymode_rope_completion',
+        'pymode_rope_complete_on_dot', 'pymode_lint_sort',
+        'pymode_rope_lookup_project', 'pymode_lint_unmodified'
+
+    * Commands added:
+        'PymodeVirtualenv'
+
+    * Commands changed:
+        'PyDoc' -> 'PymodeDoc'
+        'Pyrun' -> 'PymodeRun'
+        'PyLintToggle' -> 'PymodeLintToggle'
+        'PyLint' -> 'PymodeLint'
+        'PyLintAuto' -> 'PymodeLintAuto'
+        'RopeOpenProject' -> 'PymodeRopeNewProject'
+        'RopeUndo' -> 'PymodeRopeUndo'
+        'RopeRedo' -> 'PymodeRopeRedo'
+        'RopeRenameCurrentModule' -> 'PymodeRopeRenameModule'
+        'RopeModuleToPackage' -> 'PymodeRopeModuleToPackage'
+        'RopeGenerateAutoimportCache' -> 'PymodeRopeRegenerate'
+        'RopeOrgamizeImports' -> 'PymodeRopeAutoImport'
+
+    * Commands removed:
+        'PyLintCheckerToggle', 'RopeCloseProject', 'RopeProjectConfig',
+        'RopeRename', 'RopeCreate<...>', 'RopeWriteProject', 'RopeRename',
+        'RopeExtractVariable', 'RopeExtractMethod', 'RopeInline', 'RopeMove',
+        'RopeRestructure', 'RopeUseFunction', 'RopeIntroduceFactory',
+        'RopeChangeSignature', 'RopeMoveCurrentModule',
+        'RopeGenerate<...>', 'RopeAnalizeModule', 'RopeAutoImport',
+
+
+## 2013-10-29 0.6.19
+--------------------
+* Added `g:pymode_rope_autocomplete_map` option;
+* Removed `g:pymode_rope_map_space` option;
+* Added PEP257 checker;
+* Support 'pudb' in breakpoints;
+* Pyrun can now operate on a range of lines, and does not need to save (c) lawrenceakka
+* Update pylama to version 1.5.0
+* Add a set of `g:pymode_lint_*_symbol` options (c) kdeldycke;
+* Support virtualenv for python3 (c) mlmoses;
+
+## 2013-05-15 0.6.18
+--------------------
+* Fixed autopep8 (`PyLintAuto`) command;
+* Fix error on non-ascii characters in docstrings;
+* Update python syntax;
+
+## 2013-05-03 0.6.17
+--------------------
+* Update `Pylint` to version 0.28.0;
+* Update `pyflakes` to version 0.7.3;
+* Fixed `lint_ignore` options bug;
+* Fixed encoding problems when code running;
+
+## 2013-04-26 0.6.16
+--------------------
+* Improvement folding (thanks @alvinfrancis);
+
+## 2013-04-01 0.6.15
+--------------------
+* Bugfix release
+
+## 2013-03-16 0.6.14
+--------------------
+* Update `PEP8` to version 1.4.5;
+* Update `Pylint` to version 0.27.0;
+* Update `pyflakes` to version 0.6.1;
+* Update `autopep8` to version 0.8.7;
+* Fix breakpoint definition;
+* Update python syntax;
+* Fixed run-time error when output non-ascii in multibyte locale;
+* Move initialization into ftplugin as it is python specific;
+* Pyrex (Cython) files support;
+* Support `raw_input` in run python code;
+
+## 2012-09-07 0.6.10
+--------------------
+* Dont raise an exception when Logger has no message handler (c) nixon
+* Improve performance of white space removal (c) Dave Smith
+* Improve ropemode support (c) s0undt3ch 
+* Add `g:pymode_updatetime` option
+* Update autopep8 to version 0.8.1
+
+## 2012-09-07 0.6.9
+-------------------
+* Update autopep8
+* Improve pymode#troubleshooting#Test()
+
+## 2012-09-06 0.6.8
+-------------------
+* Add PEP8 indentation ":help 'pymode_indent'" 
+
+## 2012-08-15 0.6.7
+-------------------
+* Fix documentation. Thanks (c) bgrant;
+* Fix pymode "async queue" support.
+
+## 2012-08-02 0.6.6
+-------------------
+* Updated Pep8 to version 1.3.3
+* Updated Pylint to version 0.25.2
+* Fixed virtualenv support for windows users
+* Added pymode modeline ':help PythonModeModeline'
+* Added diagnostic tool ':call pymode#troubleshooting#Test()'
+* Added `PyLintAuto` command ':help PyLintAuto' 
+* Code checking is async operation now
+* More, more fast the pymode folding
+* Repaired execution of python code
+
+## 2012-05-24 0.6.4
+-------------------
+* Add 'pymode_paths' option
+* Rope updated to version 0.9.4
+
+## 2012-04-18 0.6.3
+-------------------
+* Fix pydocs integration
+
 ## 2012-04-10 0.6.2
 -------------------
 * Fix pymode_run for "unnamed" clipboard

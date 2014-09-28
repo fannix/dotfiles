@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/mxf/codes/leetcode/DivideTwoIntegers/src'
+let g:netrw_dirhist_2='/Users/mxf/codes/leetcode/ImplementStrStr'
+let g:netrw_dirhist_3='/Users/mxf/codes/leetcode/ImplementStrStr/src'
+let g:netrw_dirhist_4='/Users/mxf/poj/leetcode'
+let g:netrw_dirhist_5='/Users/mxf/paper_codes/senti_dict/kernel/review_sentiment.v1/train2'
+let g:netrw_dirhist_6='/Library/Frameworks/Python.framework/Versions/7.2'
+let g:netrw_dirhist_7='/Users/mxf/.ipython/profile_default'
+let g:netrw_dirhist_8='/Users/mxf/codes/apue.3e/include'

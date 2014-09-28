@@ -167,6 +167,7 @@ let g:pydiction_location = '~/.vim/ftplugin/pydiction-1.2/complete-dict'
 let g:pyflakes_use_quickfix = 0
 let g:pymode_lint_message = 0
 let g:pymode_rope = 0
+let g:pymode_folding = 0
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 let g:pymode_lint_ignore = "E111"
@@ -209,6 +210,7 @@ set fileencodings=utf8,gb18030
 set hidden
 set nocompatible
 set visualbell
+set runtimepath-=~/.vim/bundle/numbers
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fuzzyfinder
